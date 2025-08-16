@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Material Handling Checklist</title>
+<title>Material Handling Checklist — Final v7</title>
 <style>
   :root{
     --brand:#6a1b9a; --row:#f7f9fc; --header:#0ea5e9; --border:#d1d5db;
     --ok:#16a34a; --bad:#ef4444; --muted:#6b7280;
+    --rowstep:12px; /* step turun satu row */
   }
   *{box-sizing:border-box}
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;margin:0;color:#111827;background:#fff}
@@ -28,7 +29,8 @@
   /* Language buttons */
   .langbar{
     display:flex;justify-content:flex-end;gap:10px;align-items:center;
-    margin:12px 0 8px; /* diturunkan satu row dari sebelumnya (-4px => 12px) */
+    /* turun satu row: tambah top margin */
+    margin: calc(8px + var(--rowstep)) 0 8px; 
     flex-wrap:wrap;
   }
   .langbar .hint{font-size:12px;color:#374151;margin-right:4px}
@@ -102,7 +104,6 @@
   .footer{margin-top:24px;text-align:center;font-size:12px;color:#374151}
   .footer .line{height:1px;background:var(--border);margin:10px 0}
   .footer b{color:#111827}
-  /* global line */
   .line{height:1px;background:var(--border);margin:10px 0}
 
   /* responsive */
@@ -155,7 +156,7 @@
 
   <!-- LOGO: hanya Turner & Townsend -->
   <div class="logo-wrap" aria-label="Logo Turner & Townsend">
-    <img src="https://mokhamadabrar.github.io/site_inspect/tnt_logo.svg" alt="Turner & Townsend" />
+    <img src="https://mokhamadabrar.github.io/construction-inspection/tnt_logo.svg" alt="Turner & Townsend" />
   </div>
   <div class="logo-caption"></div>
 
@@ -163,11 +164,11 @@
   <div class="langbar" role="group" aria-label="Auto translate">
     <span class="hint">Auto translate:</span>
     <button id="btnID" type="button" class="lang-btn" aria-pressed="false" aria-label="Indonesia">
-      <img src="https://mokhamadabrar.github.io/site_inspect/ID.png" alt="ID"/>
+      <img src="https://mokhamadabrar.github.io/construction-inspection/ID.png" alt="ID"/>
       <span class="lbl">Indonesia</span>
     </button>
     <button id="btnEN" type="button" class="lang-btn" aria-pressed="false" aria-label="English">
-      <img src="https://mokhamadabrar.github.io/site_inspect/EN.png" alt="EN"/>
+      <img src="https://mokhamadabrar.github.io/construction-inspection/EN.png" alt="EN"/>
       <span class="lbl">English</span>
     </button>
   </div>
@@ -435,9 +436,9 @@
   <!-- Footer (diletakkan sebelum halaman Foto saat print) -->
   <div class="footer" role="contentinfo">
     <div class="line"></div>
-    <div>Created by</div>
-    <div><b>Mokhamad Abrar</b> (T&amp;T Safety Advisor)</div>
-    <div>Sustainable Development by <b>Abrar (T&amp;T)</b> @ Aug 2025</div>
+    <div>Created &amp; Review by</div>
+    <div><b>Tan Vee Meng</b> (JO Safety Director) &amp; <b>Mokhamad Abrar</b> (T&amp;T Safety Advisor)</div>
+    <div>Application Design by <b>Abrar (T&amp;T)</b> @ 2025</div>
   </div>
 
   <!-- Garis tambahan di bawah footer -->
