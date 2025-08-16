@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Material Handling v01</title>
+<title>Material Handling Checklist — Final v7</title>
 <style>
   :root{
     --brand:#6a1b9a; --row:#f7f9fc; --header:#0ea5e9; --border:#d1d5db;
@@ -15,7 +15,7 @@
   .page{max-width:1050px;margin:16px auto;padding:16px}
   .title{color:var(--brand);text-align:center;font-weight:800;font-size:clamp(18px,4vw,28px);margin:0 0 6px}
 
-  /* LOGO */
+  /* LOGO: hanya Turner & Townsend */
   .logo-wrap{
     display:flex;justify-content:center;align-items:center;margin:6px 0 12px;
     gap:16px; flex-wrap:wrap;
@@ -110,13 +110,14 @@
   @media (max-width:800px){ .meta{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:640px){ .photos{grid-template-columns:1fr} .col-no{width:64px} }
 
-  /* print */
+  /* ===================== PRINT ===================== */
   @page{size:A4 portrait;margin:12mm}
+
   @media print{
     .toolbar{display:none!important}
     .page{margin:0;padding:0}
     .score-val{font-size:16px}
-    .chk-table td{padding:6px}
+    .chk-table td{padding:5px} /* sedikit dipadatkan agar cukup 2 halaman */
     .logo-caption{display:none}
     textarea.remarks{
       border:none !important; outline:none !important; resize:none !important;
@@ -127,10 +128,19 @@
     }
     .counter{display:none}
 
-    /* Photos page dedicated */
+    /* ===== Pastikan halaman 1–2 berisi konten sampai footer, lalu pindah halaman ===== */
+    .footer{page-break-after: always; break-after: page;}
+
+    /* ===== Photos jadi satu halaman penuh, dimulai setelah footer ===== */
+    .photos-title{
+      page-break-before: always; break-before: page;
+      page-break-after: avoid;  break-after: avoid;
+      margin-top:0;
+    }
     .photos{
-      page-break-before: always;
-      page-break-after: always;
+      page-break-before: avoid; break-before: avoid;
+      page-break-after: avoid;  break-after: avoid;
+      page-break-inside: avoid; break-inside: avoid;
       grid-template-columns: 1fr 1fr;
       gap: 6mm;
       margin-top: 0;
@@ -138,13 +148,15 @@
     .photo-card{
       background:#fff; color:#111;
       border:1px solid #ddd; padding:5mm; border-radius:6px;
-      min-height:120mm;
-      break-inside: avoid;
-      page-break-inside: avoid;
+      min-height:120mm;             /* 2 baris x 120mm + gap 6mm + judul ~ 1 halaman A4 */
+      break-inside: avoid; page-break-inside: avoid;
     }
     .photo-stage{ border:1px solid #ccc; background:#fff; border-radius:4px; }
     .photo-actions{display:none}
-    .photo-desc-print{ display:block; font-size:11px; color:#111; background:transparent; padding:0; margin-top:3mm }
+    .photo-desc-print{ 
+      display:block; font-size:11px; color:#111; background:transparent; padding:0; margin-top:3mm;
+      max-height:18mm; overflow:hidden;        /* batasi agar tetap muat satu halaman */
+    }
 
     .footer{font-size:11px}
   }
@@ -173,7 +185,7 @@
     </button>
   </div>
 
-  <!-- Meta (tambah Kontraktor) -->
+  <!-- Meta -->
   <div class="meta">
     <div class="label" data-i18n="label_site">Site Assesssor</div><input id="inp-assessor" placeholder="Nama Site Assesssor"/>
     <div class="label" data-i18n="label_project">Project</div><input id="inp-project" value="JKT09" placeholder="Kode/Nama"/>
@@ -369,59 +381,6 @@
         </div>
       </td></tr>
     </tbody>
-
-    <!-- ===== SECTION D ===== -->
-    <tbody data-section="D">
-      <tr><td class="section-head" colspan="5">D. ENVIRONMENT MANAGEMENT / CLEAN WORKPLACE</td></tr>
-
-      <tr class="row-alt"><td class="col-no">D12</td><td colspan="4" class="ques">Apakah anda telah memiliki tempat sampah untuk material sisa yang akan dibuang?</td></tr>
-      <tr class="subrow row-alt"><td></td><td><div class="yn">
-        <label><input type="radio" name="D12" value="yes"> Ya</label>
-        <label><input type="radio" name="D12" value="no"> Tidak</label>
-        <label><input type="radio" name="D12" value="na"> N/A</label>
-      </div></td><td colspan="3" class="remarks-cell">
-        <div class="remarks-wrap">
-          <textarea class="remarks" maxlength="70"></textarea>
-          <div class="counter">0/70</div>
-        </div>
-      </td></tr>
-
-      <tr><td class="col-no">D13</td><td colspan="4" class="ques">Apakah anda mengetahui secara harian dimana lokasi koleksi point pembuangan sampah anda</td></tr>
-      <tr class="subrow"><td></td><td><div class="yn">
-        <label><input type="radio" name="D13" value="yes"> Ya</label>
-        <label><input type="radio" name="D13" value="no"> Tidak</label>
-        <label><input type="radio" name="D13" value="na"> N/A</label>
-      </div></td><td colspan="3" class="remarks-cell">
-        <div class="remarks-wrap">
-          <textarea class="remarks" maxlength="70"></textarea>
-          <div class="counter">0/70</div>
-        </div>
-      </td></tr>
-
-      <tr class="row-alt"><td class="col-no">D14</td><td colspan="4" class="ques">Apakah anda telah melakukan kebersihan sebelum bekerja dan sesudah bekerja dan menata kembali peralatan</td></tr>
-      <tr class="subrow row-alt"><td></td><td><div class="yn">
-        <label><input type="radio" name="D14" value="yes"> Ya</label>
-        <label><input type="radio" name="D14" value="no"> Tidak</label>
-        <label><input type="radio" name="D14" value="na"> N/A</label>
-      </div></td><td colspan="3" class="remarks-cell">
-        <div class="remarks-wrap">
-          <textarea class="remarks" maxlength="70"></textarea>
-          <div class="counter">0/70</div>
-        </div>
-      </td></tr>
-
-      <tr><td class="col-no">D15</td><td colspan="4" class="ques">Jika material anda didalam building apakah anda menyediakan Floor Protection dan menghindari terjadinya Debu</td></tr>
-      <tr class="subrow"><td></td><td><div class="yn">
-        <label><input type="radio" name="D15" value="yes"> Ya</label>
-        <label><input type="radio" name="D15" value="no"> Tidak</label>
-        <label><input type="radio" name="D15" value="na"> N/A</label>
-      </div></td><td colspan="3" class="remarks-cell">
-        <div class="remarks-wrap">
-          <textarea class="remarks" maxlength="70"></textarea>
-          <div class="counter">0/70</div>
-        </div>
-      </td></tr>
-    </tbody>
   </table>
 
   <!-- Scores -->
@@ -433,12 +392,12 @@
     <div class="score-card"><h4>Total Score <span id="badge" class="badge">0/100</span></h4><div class="score-val" id="totalScore">0%</div></div>
   </div>
 
-  <!-- Footer (diletakkan sebelum halaman Foto saat print) -->
+  <!-- Footer -->
   <div class="footer" role="contentinfo">
     <div class="line"></div>
-    <div>Created by</div>
-    <div><b>Mokhamad Abrar</b> (T&amp;T Safety Advisor)</div>
-    <div>Sustainable Apps Development by <b>Abrar (T&amp;T)</b> @ Aug 2025</div>
+    <div>Created &amp; Review by</div>
+    <div><b>Tan Vee Meng</b> (JO Safety Director) &amp; <b>Mokhamad Abrar</b> (T&amp;T Safety Advisor)</div>
+    <div>Application Design by <b>Abrar (T&amp;T)</b> @ 2025</div>
   </div>
 
   <!-- Garis tambahan di bawah footer -->
@@ -447,7 +406,7 @@
   <!-- Judul Photos -->
   <div class="photos-title">Photos Assessment Material</div>
 
-  <!-- Photos (akan menjadi halaman tersendiri saat print) -->
+  <!-- Photos (halaman khusus saat print) -->
   <div class="photos" id="photos">
     <div class="photo-card" data-slot="1">
       <div class="photo-stage"><span>Add Photo</span></div>
