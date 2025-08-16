@@ -16,6 +16,14 @@
     --accent:#7dd3fc;
     --ok:#86efac; --warn:#facc15; --bad:#fb7185;
     --br:16px;
+
+    /* ===== tambahan untuk tema terang lembut ===== */
+    --wrapBg:#f3f4f6;         /* abu lembut untuk .wrap */
+    --cardLight:#f9fafb;      /* putih lembut untuk .card.grid */
+    --inkDark:#0f172a;        /* teks gelap untuk latar terang */
+    --mutedDark:#475569;      /* teks sekunder pada latar terang */
+    --lineLight:#e5e7eb;      /* garis tipis terang */
+    --lineMid:#cbd5e1;        /* garis medium */
   }
   *{box-sizing:border-box}
   body{
@@ -27,7 +35,16 @@
   header{padding:22px 16px 8px;text-align:center}
   header h1{margin:0 0 6px;font-weight:700;letter-spacing:.2px}
   header p{margin:0;color:var(--muted)}
-  .wrap{max-width:1100px;margin:18px auto 40px;padding:0 16px}
+  .wrap{
+    max-width:1100px;margin:18px auto 40px;padding:0 16px;
+
+    /* ===== perubahan sesuai instruksi ===== */
+    background:var(--wrapBg);
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:var(--br);
+    padding-top:14px; padding-bottom:14px;
+    color:var(--inkDark); /* default teks gelap pada area terang */
+  }
   .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0 16px}
   .btn{cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0e1530;color:var(--ink)}
   .btn:hover{border-color:var(--accent)}
@@ -38,7 +55,8 @@
     border-radius:var(--br);
     padding:18px;
     box-shadow:0 10px 30px rgba(0,0,0,.35);
-    margin-bottom:14px
+    margin-bottom:14px;
+    color:var(--ink); /* pastikan kartu gelap tetap teks terang */
   }
   .grid{display:grid;gap:14px}
   @media(min-width:980px){ .grid{grid-template-columns:1.08fr 1.12fr}}
@@ -67,6 +85,50 @@
   footer{max-width:1100px;margin:20px auto 60px;color:var(--muted);text-align:center;padding:0 16px}
   footer a{color:var(--accent);text-decoration:none}
   footer a:hover{text-decoration:underline}
+
+  /* ====== OVERRIDE UNTUK .card.grid (putih lembut + teks gelap) ====== */
+  .card.grid{
+    background:var(--cardLight);
+    color:var(--inkDark);
+    border:1px solid var(--lineMid);
+    box-shadow:0 8px 20px rgba(2,6,23,.06);
+  }
+  .card.grid label,
+  .card.grid .small,
+  .card.grid .pill{ color:var(--mutedDark); }
+  .card.grid .stat{
+    background:#f8fafc;
+    border-color:var(--lineMid);
+    color:var(--inkDark);
+  }
+  .card.grid input[type=number],
+  .card.grid select{
+    background:#ffffff;
+    color:var(--inkDark);
+    border:1px solid var(--lineMid);
+  }
+  .card.grid input[type=number]:focus,
+  .card.grid select:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(125,211,252,.25);
+    outline:none;
+  }
+  .card.grid table th{
+    background:#f1f5f9;
+    color:var(--mutedDark);
+    border-bottom:1px solid var(--lineLight);
+  }
+  .card.grid table td{
+    border-bottom:1px solid var(--lineLight);
+    color:var(--inkDark);
+  }
+  .card.grid .pill.ok{ color:#16a34a; border-color:rgba(22,163,74,.35); }
+  .card.grid .pill.warn{ color:#ca8a04; border-color:rgba(202,138,4,.35); }
+  .card.grid .pill.bad{ color:#dc2626; border-color:rgba(220,38,38,.35); }
+  .card.grid canvas{
+    background:#ffffff;           /* chart lebih bersih pada latar terang */
+    border:1px solid var(--lineLight);
+  }
 
   /* ==== PRINT FIXES ==== */
   @media print{
@@ -292,7 +354,7 @@ const T = {
     rotExample1_prefix:"Contoh: Pekerjaan total alat ",rotExample1_mid:" jam/hari → minimal ",rotExample1_suf:" operator",
     rotExample2_prefix:"Rotasi blok: ",rotExample2_mid:" menit kerja → ",rotExample2_suf:" menit jeda → berganti operator maka blok berikutnya",
     s3:"3. Engineering Controls",s3ul:["Gunakan model alat low-vibration & pegangan anti-vibration bawaan pabrik.","Perawatan: balancing, alignment, penggantian bearing/brush; getaran naik saat komponen aus.","Isolasi jalur transmisi: mounting elastomer/damper, atau sistem peredam aktif pada alat berat."],
-    s4:"4. Administrative Controls",s4ul:["Jadwalkan pekerjaan tinggi getaran di jam awal saat kondisi fisik optimal.","Hindari penugasan berturut-turut durasi penuh pada hari berikutnya untuk tugas yang sama.","Catat durasi paparan harian per operator; audit bulanan kepatuhan duty/jeda."],
+    s4:"4. Administrative Controls",s4ul:["Jadwalkan pekerjaan tinggi getaran di jam awal saat kondisi fisik optimal.","Hindari penugasan berturut-turut durasi penuh pada hari berikutnya untuk tugas yang sama.","Catat durasi paparan harian per operator; audit duty/jeda."],
     s5:"5. Pelatihan & Teknik Kerja",s5ul:["Genggam ringan—hindari menekan alat berlebihan; biarkan sistem redam bekerja.","Gunakan dua tangan bila memungkinkan; jaga postur untuk mengurangi transmisi ke lengan.","Pilih aksesori/pisau/mata bor tajam & sesuai material untuk mengurangi gaya dorong."],
     s6:"6. Rekomendasi PPE",s6ul:["Sarung tangan anti-vibration (EN ISO 10819) — efek terbatas di frekuensi rendah.","Grip/handle ergonomis untuk menurunkan gaya genggam & slip."],
     s7:"7. Monitoring & Evaluasi",s7ul:["Ukur ulang getaran tiap 6–12 bulan atau pasca modifikasi alat/proses.","Rekalkulasi A(8) bila ada perubahan alat, material, atau metode kerja.","Investigasi bila A(8) mendekati EAV (2,5 m/s²) atau melebihi target internal."],
